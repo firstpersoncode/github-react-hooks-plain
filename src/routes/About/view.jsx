@@ -17,8 +17,8 @@ const About = () => (
             <meta name="description" content="GitHub page with user search and repository search, build using React" />
         </Helmet>
         <p>GitHub page with user search and repository search, build using React</p>
-        <p>Nasser Maronie: nassermaronie@gmail.com</p>
-        <p>git@github.com:firstpersoncode/github-react-hooks.git</p>
+        <p>Nasser Maronie: nasser.maronie@gmail.com</p>
+        <p>git@github.com:firstpersoncode/github-react-hooks-plain.git</p>
     </>
 )
 

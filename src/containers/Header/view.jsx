@@ -105,6 +105,7 @@ const Header = () => {
                     <h3 style={{ margin: 0, marginRight: 'auto' }}>Nasser&lsquo;s GitHub search with React Hooks</h3>
                     <Link to="/">Profile</Link>
                     <Link to="/project">Project</Link>
+                    <Link to="/about">About</Link>
                 </div>
                 <form onSubmit={_submit} className={classes.form}>
                     <input

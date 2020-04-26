@@ -13,7 +13,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import marked from 'marked'
 
 import useStore, { SET_ERROR } from '~/store'
@@ -124,16 +124,13 @@ const Project = () => {
                               ))
                             : null}
                     </div>
-
                     <h1>{project.name}</h1>
-                    <UserCard user={project.owner} onClick={_openProfile(project.owner.login)} />
+                    Owner: <UserCard user={project.owner} onClick={_openProfile(project.owner.login)} />
                     <br />
                     <a href={project.html_url} target="_blank" rel="noopener noreferrer">
                         @{project.full_name}
                     </a>
-
                     <p>{project.description}</p>
-
                     <div className={classes.contribs}>
                         <span>Contributors:</span>{' '}
                         {contributors.length ? (
@@ -144,7 +141,6 @@ const Project = () => {
                             <p>Loading ..</p>
                         ) : null}
                     </div>
-
                     <div className={classes.markdown}>
                         <small>Created: {new Date(project.created_at).toLocaleString()}</small> |{' '}
                         <small>Updated: {new Date(project.updated_at).toLocaleString()}</small> |{' '}
