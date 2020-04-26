@@ -1,18 +1,6 @@
-# my-react-kit
-
-### With React Hooks, Typescript, hot reload and code splitting..
-
----
-
-##### github: [https://github.com/firstpersoncode/my-react-kit](https://github.com/firstpersoncode/my-react-kit)
+# github-rract-hooks-plain
 
 ### Getting Started
-
-clone repo:
-
-```bash
-git clone git@github.com:firstpersoncode/my-react-kit.git
-```
 
 install deps:
 
@@ -64,7 +52,7 @@ yarn analyze
     -   _+ Dev Server_
     -   _+ Bundle Analyzer_
 -   [x] Babel Loader
--   [x] Typescript Loader
+-   [ ] Typescript Loader
 -   [x] File Loader
 -   [x] Material-UI
 -   [ ] Circle CI
