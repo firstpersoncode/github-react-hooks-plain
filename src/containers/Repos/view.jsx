@@ -63,7 +63,7 @@ const Repos = () => {
     const history = useHistory()
 
     const _openProject = (projectName) => async () => {
-        history.push('/project')
+        await history.push({ pathname: '/project', state: { preventLoadData: true } })
         await actions({ type: SET_PROJECT_SELECTED, payload: projectName })
         await actions({ type: SET_PROJECT_CONTENTS, payload: projectName })
         actions({ type: SET_PROJECT_LANGUAGES, payload: projectName })

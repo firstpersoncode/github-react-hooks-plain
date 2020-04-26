@@ -68,7 +68,7 @@ const Project = () => {
 
     const history = useHistory()
     const _openProfile = (userName) => async () => {
-        history.push('/')
+        await history.push({ pathname: '/', state: { preventLoadData: true } })
         await actions({ type: SET_USER_SELECTED, payload: userName })
         actions({ type: SET_USER_EVENTS_NEXT, payload: userName })
     }

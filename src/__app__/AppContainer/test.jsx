@@ -1,6 +1,7 @@
 import React from 'react'
 import enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import { BrowserRouter } from 'react-router-dom'
 
 import AppContainer from '.'
 
@@ -18,7 +19,12 @@ jest.mock('react-router-dom', () => ({
 
 describe('AppContainer', () => {
     it('should render AppContainer without crashing', () => {
-        const wrapper = shallow(<AppContainer />)
+        const App = () => (
+            <BrowserRouter>
+                <AppContainer />
+            </BrowserRouter>
+        )
+        const wrapper = shallow(<App />)
         expect(wrapper.exists()).toBe(true)
     })
 })

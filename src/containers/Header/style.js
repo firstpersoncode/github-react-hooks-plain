@@ -16,7 +16,10 @@ const useStyle = makeStyles(() => ({
         justifyContent: 'flex-end',
         alignItems: 'center',
         '& > *': {
-            padding: 10
+            padding: 10,
+            '& > button': {
+                padding: 15
+            }
         }
     },
     result: {

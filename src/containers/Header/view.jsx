@@ -100,6 +100,7 @@ const Header = () => {
         <>
             <header className={classes.root}>
                 <div className={classes.nav}>
+                    <h3 style={{ margin: 0, marginRight: 'auto' }}>Nasser&lsquo;s GitHub search with React Hooks</h3>
                     <Link to="/">Profile</Link>
                     <Link to="/project">Project</Link>
                 </div>

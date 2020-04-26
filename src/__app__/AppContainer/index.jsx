@@ -12,7 +12,7 @@
 
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { matchRoutes, renderRoutes } from 'react-router-config'
 
 import routes from '~/routes'
@@ -27,14 +27,23 @@ import useStyle from './style'
 const AppContainer = () => {
     const classes = useStyle()
 
-    const { pathname } = useLocation()
+    const { pathname, state } = useLocation()
+    const history = useHistory()
     const store = useStore()
 
     useEffect(() => {
-        matchRoutes(routes, pathname).forEach(({ route, match }) => {
+        matchRoutes(routes, pathname).forEach(async ({ route, match }) => {
             window.scrollTo(0, 0)
-            if (route.exact && route.loadData) {
-                route.loadData(store, { route, match })
+            if (route.exact && route.loadData && !(state && state.preventLoadData)) {
+                await route.loadData(store, { route, match })
+            }
+
+            // immediately set preventLoadData to false after route loaded
+            if (route.exact && state && state.preventLoadData) {
+                history.replace({
+                    pathname,
+                    state: { ...state, preventLoadData: false }
+                })
             }
         })
     }, [pathname])
