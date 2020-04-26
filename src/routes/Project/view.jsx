@@ -8,7 +8,7 @@
     _fetchMarkdown request to raw file of the README.md project, set then render the markdown state
     _openProfile for trigger the request to GitHub server, return user info based on clicked owner
 
-    Render project info and its README.md file
+    Render project info, project search history and its README.md file
 */
 
 import React, { useState, useEffect } from 'react'

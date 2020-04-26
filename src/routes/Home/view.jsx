@@ -4,7 +4,7 @@
     Home route view
 
     _openProfile for trigger the request to GitHub server, return user info based on clicked history
-    Render user info
+    Render user info, and user search history
 */
 
 import React from 'react'
