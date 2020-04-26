@@ -22,6 +22,15 @@ const useStyle = makeStyles(() => ({
             margin: 5
         }
     },
+    contribs: {
+        display: 'flex',
+        alignItems: 'center',
+        '& > *': {
+            padding: 5,
+            margin: 5
+        },
+        flexWrap: 'wrap'
+    },
     lang: {
         padding: 5,
         backgroundColor: '#EEE'

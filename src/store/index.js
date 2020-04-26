@@ -37,12 +37,19 @@ import {
     SET_USER_QUERY,
     SET_USER_QUERY_PREV
 } from './user/constant'
-import { setProjectSelected, setProjectContents, setProjectLanguages, setProjectQuery } from './project'
+import {
+    setProjectSelected,
+    setProjectContents,
+    setProjectLanguages,
+    setProjectContributors,
+    setProjectQuery
+} from './project'
 import { projectState } from './project/state'
 import {
     SET_PROJECT_SELECTED,
     SET_PROJECT_CONTENTS,
     SET_PROJECT_LANGUAGES,
+    SET_PROJECT_CONTRIBUTORS,
     SET_PROJECT_QUERY,
     SET_PROJECT_QUERY_PREV
 } from './project/constant'
@@ -118,6 +125,9 @@ export const useConfigStore = () => {
 
             case SET_PROJECT_LANGUAGES:
                 return await setProjectLanguages(setProject, setError, payload)
+
+            case SET_PROJECT_CONTRIBUTORS:
+                return await setProjectContributors(setProject, setError, payload)
 
             default:
                 return state

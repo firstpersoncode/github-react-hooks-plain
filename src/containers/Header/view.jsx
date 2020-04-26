@@ -9,7 +9,7 @@
     _closeQueryResult for closing the dialog search result
     _nextQuery for requesting to GitHub server, returning next list of query (user, project)
     _prevQuery for requesting to GitHub server, returning prev list of query (user, project)
-    _openProfile for closing the dialog result and trigger the request to GitHub server, return user info based on clicked query
+    _openDetail for closing the dialog result and trigger the request to GitHub server, return user info based on clicked query
 
     Render search bar, page navigation and dialog of search result
 */
@@ -23,6 +23,7 @@ import {
     SET_PROJECT_SELECTED,
     SET_PROJECT_CONTENTS,
     SET_PROJECT_LANGUAGES,
+    SET_PROJECT_CONTRIBUTORS,
     SET_PROJECT_QUERY,
     SET_PROJECT_QUERY_PREV
 } from '~/store/project/constant'
@@ -79,11 +80,12 @@ const Header = () => {
         }
     }
 
-    const _openProfile = (selected) => async () => {
+    const _openDetail = (selected) => async () => {
         window.scrollTo(0, 0)
         _closeQueryResult()
         if (isProject) {
             await actions({ type: SET_PROJECT_SELECTED, payload: selected })
+            await actions({ type: SET_PROJECT_CONTRIBUTORS, payload: selected })
             await actions({ type: SET_PROJECT_CONTENTS, payload: selected })
             actions({ type: SET_PROJECT_LANGUAGES, payload: selected })
         } else {
@@ -125,7 +127,7 @@ const Header = () => {
                     {query.length
                         ? query.map((q, i) => (
                               <div key={i} className={classes.item}>
-                                  <button onClick={_openProfile(q.login || q.full_name)} className={classes.itemList}>
+                                  <button onClick={_openDetail(q.login || q.full_name)} className={classes.itemList}>
                                       <ProgressiveImage
                                           fallBack="/img/placeholder-square.jpg"
                                           src={q.avatar_url || q.owner.avatar_url}

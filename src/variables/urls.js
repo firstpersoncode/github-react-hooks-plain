@@ -97,3 +97,11 @@ export const ENDPOINT_GITHUB_PROJECT_CONTENT = (projectName) =>
     ENDPOINT_GITHUB_PROJECT + '/' + projectName + '/contents?client_id=' + clientId + '&client_secret=' + clientSecret
 export const ENDPOINT_GITHUB_PROJECT_LANGUAGE = (projectName) =>
     ENDPOINT_GITHUB_PROJECT + '/' + projectName + '/languages?client_id=' + clientId + '&client_secret=' + clientSecret
+export const ENDPOINT_GITHUB_PROJECT_CONTRIBUTOR = (projectName) =>
+    ENDPOINT_GITHUB_PROJECT +
+    '/' +
+    projectName +
+    '/contributors?client_id=' +
+    clientId +
+    '&client_secret=' +
+    clientSecret

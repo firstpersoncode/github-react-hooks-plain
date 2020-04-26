@@ -16,7 +16,12 @@ import { useHistory } from 'react-router-dom'
 
 import useStore from '~/store'
 import { SET_USER_REPOS_NEXT, SET_USER_REPOS_PREV, SET_USER_REPOS_PANEL } from '~/store/user/constant'
-import { SET_PROJECT_SELECTED, SET_PROJECT_CONTENTS, SET_PROJECT_LANGUAGES } from '~/store/project/constant'
+import {
+    SET_PROJECT_SELECTED,
+    SET_PROJECT_CONTENTS,
+    SET_PROJECT_LANGUAGES,
+    SET_PROJECT_CONTRIBUTORS
+} from '~/store/project/constant'
 import ProgressiveImage from '~/components/ProgressiveImage'
 
 import useStyle from './style'
@@ -65,6 +70,7 @@ const Repos = () => {
     const _openProject = (projectName) => async () => {
         await history.push({ pathname: '/project', state: { preventLoadData: true } })
         await actions({ type: SET_PROJECT_SELECTED, payload: projectName })
+        await actions({ type: SET_PROJECT_CONTRIBUTORS, payload: projectName })
         await actions({ type: SET_PROJECT_CONTENTS, payload: projectName })
         actions({ type: SET_PROJECT_LANGUAGES, payload: projectName })
     }

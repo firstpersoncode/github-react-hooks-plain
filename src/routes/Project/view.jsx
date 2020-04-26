@@ -28,7 +28,15 @@ const Project = () => {
 
     const project =
         state.project && state.project.selected && Object.keys(state.project.selected).length && state.project.selected
-    const { selectedFetch, contents, contentsFetch, languages, languagesFetch } = state.project
+    const {
+        selectedFetch,
+        contents,
+        contentsFetch,
+        languages,
+        languagesFetch,
+        contributors,
+        contributorsFetch
+    } = state.project
 
     const [markdown, setMarkdown] = useState('')
     const _fetchMarkdown = async () => {
@@ -101,6 +109,22 @@ const Project = () => {
                     </a>
 
                     <p>{project.description}</p>
+
+                    <div className={classes.contribs}>
+                        <span>Contributors:</span>{' '}
+                        {contributors.length
+                            ? contributors.map((contrib, i) => (
+                                  <button key={i} onClick={_openProfile(contrib.login)} className={classes.profile}>
+                                      <ProgressiveImage
+                                          fallBack="/img/placeholder-square.jpg"
+                                          src={contrib.avatar_url}
+                                          render={(src) => <img width="20" alt={project.owner.login} src={src} />}
+                                      />
+                                      @{contrib.login}
+                                  </button>
+                              ))
+                            : null}
+                    </div>
 
                     <div className={classes.markdown}>
                         <small>Created: {new Date(project.created_at).toLocaleString()}</small> |{' '}

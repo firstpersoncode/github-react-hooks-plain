@@ -9,7 +9,8 @@ import {
     ENDPOINT_GITHUB_PROJECT_NAME,
     ENDPOINT_GITHUB_PROJECT_CONTENT,
     ENDPOINT_GITHUB_PROJECT_LANGUAGE,
-    ENDPOINT_GITHUB_PROJECT_QUERY
+    ENDPOINT_GITHUB_PROJECT_QUERY,
+    ENDPOINT_GITHUB_PROJECT_CONTRIBUTOR
 } from '~/variables/urls'
 
 import { projectState } from './state'
@@ -113,6 +114,33 @@ export const setProjectLanguages = async (setState, setError, projectName) => {
         }))
     } catch (err) {
         setState((prev) => ({ ...prev, languagesFetch: false }))
+        setError({ message: err.message, statusCode: err.statusCode || 500 })
+        throw err
+    }
+}
+
+export const setProjectContributors = async (setState, setError, projectName) => {
+    setState((prev) => ({
+        ...prev,
+        contributorsFetch: true
+    }))
+
+    try {
+        const pcontributors = await fetch(ENDPOINT_GITHUB_PROJECT_CONTRIBUTOR(projectName))
+
+        if (!pcontributors.ok) {
+            throw await pcontributors.json()
+        }
+
+        const contributors = await pcontributors.json()
+
+        setState((prev) => ({
+            ...prev,
+            contributors,
+            contributorsFetch: false
+        }))
+    } catch (err) {
+        setState((prev) => ({ ...prev, contributorsFetch: false }))
         setError({ message: err.message, statusCode: err.statusCode || 500 })
         throw err
     }
