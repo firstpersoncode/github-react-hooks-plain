@@ -57,14 +57,13 @@ export const userState = {
 }
 
 export const setUserQuery = async (setState, setError, q, next) => {
-    let currPage = 1
+    let currPage = 0
 
-    setState((prev) => {
+    await setState((prev) => {
         currPage = next ? prev.queryPage + 1 : prev.queryPage > 1 ? prev.queryPage - 1 : 1
 
         return {
             ...prev,
-            queryPage: currPage,
             queryFetch: true
         }
     })
@@ -78,7 +77,7 @@ export const setUserQuery = async (setState, setError, q, next) => {
 
         const query = await pquery.json()
 
-        setState((prev) => ({ ...prev, query: query.items, queryFetch: false }))
+        setState((prev) => ({ ...prev, query: query.items, queryPage: currPage, queryFetch: false }))
     } catch (err) {
         setState((prev) => ({ ...prev, queryFetch: false }))
         setError({ message: err.message, statusCode: err.statusCode || 500 })
@@ -107,14 +106,13 @@ export const setUserSelected = async (setState, setError, userName) => {
 }
 
 export const setUserEvents = async (setState, setError, userName, next) => {
-    let currPage = 1
+    let currPage = 0
 
-    setState((prev) => {
+    await setState((prev) => {
         currPage = next ? prev.eventsPage + 1 : prev.eventsPage > 1 ? prev.eventsPage - 1 : 1
 
         return {
             ...prev,
-            eventsPage: currPage,
             eventsFetch: true
         }
     })
@@ -131,6 +129,7 @@ export const setUserEvents = async (setState, setError, userName, next) => {
         setState((prev) => ({
             ...prev,
             events,
+            eventsPage: currPage,
             eventsFetch: false
         }))
     } catch (err) {
@@ -141,14 +140,13 @@ export const setUserEvents = async (setState, setError, userName, next) => {
 }
 
 export const setUserRepos = async (setState, setError, userName, next) => {
-    let currPage = 1
+    let currPage = 0
 
-    setState((prev) => {
+    await setState((prev) => {
         currPage = next ? prev.reposPage + 1 : prev.reposPage > 1 ? prev.reposPage - 1 : 1
 
         return {
             ...prev,
-            reposPage: currPage,
             reposFetch: true
         }
     })
@@ -165,6 +163,7 @@ export const setUserRepos = async (setState, setError, userName, next) => {
         setState((prev) => ({
             ...prev,
             repos,
+            reposPage: currPage,
             reposFetch: false
         }))
     } catch (err) {
@@ -175,36 +174,26 @@ export const setUserRepos = async (setState, setError, userName, next) => {
 }
 
 export const setUserReposPanel = async (setState, setError, userName) => {
-    let currPage = 0
-
     setState((prev) => {
-        currPage = prev.reposPage
+        if (!prev.reposPage) {
+            setUserRepos(setState, setError, userName, true)
+        }
 
         return {
             ...prev,
-            reposPage: currPage,
             reposPanel: !prev.reposPanel
         }
     })
-
-    if (!currPage) {
-        try {
-            await setUserRepos(setState, setError, userName, true)
-        } catch (err) {
-            throw err
-        }
-    }
 }
 
 export const setUserFollowings = async (setState, setError, userName, next) => {
     let currPage = 1
 
-    setState((prev) => {
+    await setState((prev) => {
         currPage = next ? prev.followingsPage + 1 : prev.followingsPage > 1 ? prev.followingsPage - 1 : 1
 
         return {
             ...prev,
-            followingsPage: currPage,
             followingsFetch: true
         }
     })
@@ -221,6 +210,7 @@ export const setUserFollowings = async (setState, setError, userName, next) => {
         setState((prev) => ({
             ...prev,
             followings,
+            followingsPage: currPage,
             followingsFetch: false
         }))
     } catch (err) {
@@ -231,36 +221,26 @@ export const setUserFollowings = async (setState, setError, userName, next) => {
 }
 
 export const setUserFollowingsPanel = async (setState, setError, userName) => {
-    let currPage = 0
-
     setState((prev) => {
-        currPage = prev.followingsPage
+        if (!prev.followingsPage) {
+            setUserFollowings(setState, setError, userName, true)
+        }
 
         return {
             ...prev,
-            followingsPage: currPage,
             followingsPanel: !prev.followingsPanel
         }
     })
-
-    if (!currPage) {
-        try {
-            await setUserFollowings(setState, setError, userName, true)
-        } catch (err) {
-            throw err
-        }
-    }
 }
 
 export const setUserFollowers = async (setState, setError, userName, next) => {
-    let currPage = 1
+    let currPage = 0
 
-    setState((prev) => {
+    await setState((prev) => {
         currPage = next ? prev.followersPage + 1 : prev.followersPage > 1 ? prev.followersPage - 1 : 1
 
         return {
             ...prev,
-            followersPage: currPage,
             followersFetch: true
         }
     })
@@ -277,6 +257,7 @@ export const setUserFollowers = async (setState, setError, userName, next) => {
         setState((prev) => ({
             ...prev,
             followers,
+            followersPage: currPage,
             followersFetch: false
         }))
     } catch (err) {
@@ -287,23 +268,14 @@ export const setUserFollowers = async (setState, setError, userName, next) => {
 }
 
 export const setUserFollowersPanel = async (setState, setError, userName) => {
-    let currPage = 0
-
     setState((prev) => {
-        currPage = prev.followersPage
+        if (!prev.followersPage) {
+            setUserFollowers(setState, setError, userName, true)
+        }
 
         return {
             ...prev,
-            followersPage: currPage,
             followersPanel: !prev.followersPanel
         }
     })
-
-    if (!currPage) {
-        try {
-            await setUserFollowers(setState, setError, userName, true)
-        } catch (err) {
-            throw err
-        }
-    }
 }

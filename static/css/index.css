@@ -1,0 +1,21 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    overflow: auto !important;
+}
+
+html,
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 15px;
+    background-color: '#DDD';
+}
+
+button {
+    cursor: pointer;
+}

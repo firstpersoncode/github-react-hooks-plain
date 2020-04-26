@@ -73,53 +73,47 @@ const Project = () => {
 
             {project ? (
                 <div className={classes.root + (selectedFetch ? ' loading' : '')}>
-                    <h3>{project.name}</h3>
-                    <button onClick={_openProfile(project.owner.login)}>
+                    <h1>{project.name}</h1>
+                    <button onClick={_openProfile(project.owner.login)} className={classes.profile}>
                         <ProgressiveImage
                             fallBack={project.owner.avatar_url}
                             src={project.owner.avatar_url}
-                            render={(src) => <img width="30" alt={project.owner.login} src={src} />}
+                            render={(src) => <img width="20" alt={project.owner.login} src={src} />}
                         />
                         @{project.owner.login}
                     </button>
-
+                    <br />
                     <a href={project.html_url} target="_blank" rel="noopener noreferrer">
                         @{project.full_name}
                     </a>
 
                     <p>{project.description}</p>
 
-                    <div className={classes.langs}>
-                        {Object.keys(languages).length ? (
-                            Object.keys(languages).map((lang, i) => <small key={i}>{lang}</small>)
-                        ) : languagesFetch ? (
-                            <p>Loading ..</p>
-                        ) : null}
-                    </div>
-
-                    <div className={classes.right}>
+                    <div className={classes.markdown}>
                         <small>Created: {new Date(project.created_at).toLocaleString()}</small> |{' '}
                         <small>Updated: {new Date(project.updated_at).toLocaleString()}</small> |{' '}
                         <small>Pushed: {new Date(project.pushed_at).toLocaleString()}</small>
-                    </div>
-
-                    <div>
+                        <div className={classes.langs}>
+                            Tech stack:
+                            {Object.keys(languages).length ? (
+                                Object.keys(languages).map((lang, i) => (
+                                    <span key={i} className={classes.lang}>
+                                        {lang}
+                                    </span>
+                                ))
+                            ) : languagesFetch ? (
+                                <p>Loading ..</p>
+                            ) : null}
+                        </div>
                         {contentsFetch ? (
                             <p>Loading content ...</p>
                         ) : markdown ? (
                             <article dangerouslySetInnerHTML={{ __html: markdown }}></article>
-                        ) : (
-                            'No README.md file was found in this project'
-                        )}
+                        ) : null}
                     </div>
                 </div>
             ) : (
-                <p>
-                    Try search project using the search top bar, or
-                    <Link to={PATH_ROOT}>
-                        <button>Go back to profile search</button>
-                    </Link>
-                </p>
+                <p style={{ textAlign: 'center' }}>Try search project using the search top bar</p>
             )}
         </>
     )

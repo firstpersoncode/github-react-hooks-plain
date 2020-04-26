@@ -29,14 +29,14 @@ export const projectState = {
 }
 
 export const setProjectQuery = async (setState, setError, q, next) => {
-    let currPage = 1
+    let currPage = 0
 
-    setState((prev) => {
+    await setState((prev) => {
         currPage = next ? prev.queryPage + 1 : prev.queryPage > 1 ? prev.queryPage - 1 : 1
 
         return {
             ...prev,
-            queryPage: currPage,
+
             queryFetch: true
         }
     })
@@ -50,7 +50,7 @@ export const setProjectQuery = async (setState, setError, q, next) => {
 
         const query = await pquery.json()
 
-        setState((prev) => ({ ...prev, query: query.items, queryFetch: false }))
+        setState((prev) => ({ ...prev, query: query.items, queryPage: currPage, queryFetch: false }))
     } catch (err) {
         setState((prev) => ({ ...prev, queryFetch: false }))
         setError({ message: err.message, statusCode: err.statusCode || 500 })

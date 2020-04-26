@@ -2,20 +2,22 @@ import { makeStyles } from '@material-ui/styles'
 
 const useStyle = makeStyles(() => ({
     root: {
-        paddingTop: 15,
-        paddingBottom: 15,
-        backgroundColor: '#000',
-        boxShadow: '0 0 10px 10px rgba(0,0,0,0.3)',
-        width: '100%',
+        backgroundColor: '#FFF',
+        boxShadow: '0 0 10px 5px rgba(0,0,0,0.3)',
+
         zIndex: 1000,
         position: 'sticky',
         top: 0,
-        minHeight: 50
+        minHeight: 50,
+        padding: 15
     },
     nav: {
         display: 'flex',
-        justifyContent: 'flext-end',
-        alignItems: 'center'
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        '& > *': {
+            padding: 10
+        }
     }
 }))
 

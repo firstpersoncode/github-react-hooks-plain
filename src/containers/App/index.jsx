@@ -8,6 +8,7 @@ import Header from '~/containers/Header'
 import Footer from '~/containers/Footer'
 import { CDN_MATERIALUI_ICONS, CDN_GOOGLE_FONT_STYLES } from '~/variables/urls'
 import useStore, { SET_ERROR } from '~/store'
+import Dialog from '~/components/Dialog'
 
 import useStyle from './style'
 
@@ -45,16 +46,10 @@ const App = () => {
             <div className={classes.content}>{renderRoutes(routes)}</div>
             <Footer />
 
-            <div className={classes.dialogContainer + (error && error.statusCode ? ' open' : '')}>
-                <div>
-                    <p>{error ? 'Oops.. Something went wrong' : ''}</p>
-                    {error ? <small>{error.message}</small> : null}
-
-                    <button onClick={_closeError} autoFocus>
-                        Close
-                    </button>
-                </div>
-            </div>
+            <Dialog onClose={_closeError} open={error && error.statusCode}>
+                <p>{error ? 'Oops.. Something went wrong' : ''}</p>
+                {error ? <small>{error.message}</small> : null}
+            </Dialog>
         </>
     )
 }

@@ -30,13 +30,13 @@ const Home = () => {
 
             {user ? (
                 <div className={classes.container}>
-                    <div>
+                    <div className={classes.main}>
                         <Profile />
 
                         <Events />
                     </div>
 
-                    <div>
+                    <div className={classes.side}>
                         <Followings />
 
                         <Followers />

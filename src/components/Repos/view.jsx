@@ -15,7 +15,11 @@ const Repos = () => {
     const user = state.user && state.user.selected && Object.keys(state.user.selected).length && state.user.selected
     const { repos, reposPanel, reposPage, reposFetch } = state.user
 
-    const _toggleRepos = () => {
+    const _toggleRepos = (e) => {
+        if (e) {
+            e.stopPropagation()
+        }
+
         if (!user) {
             return
         }
@@ -53,38 +57,48 @@ const Repos = () => {
     }
 
     return (
-        <div onClick={_toggleRepos} className={classes.root + (reposFetch ? ' loading' : '')}>
-            <span>Repos</span>
-            <small>{user.public_repos}</small>
-            <button onClick={_toggleRepos}>{'expand'}</button>
-            <div className={classes.body + (reposPanel ? ' open' : '')}>
-                {repos && repos.length ? (
-                    <ul>
-                        {repos
-                            .filter((repo) => !repo.private)
-                            .map((repo) => (
-                                <li key={repo.id} onClick={_openProject(repo.full_name)} className={classes.item}>
-                                    <span>
-                                        <ProgressiveImage
-                                            fallBack={repo.avatar_url}
-                                            src={repo.avatar_url}
-                                            render={(src) => <img alt={repo.login} src={src} />}
-                                        />
-                                    </span>
-                                    <p>{repo.name}</p>
-                                    {repo.description ? <small>{repo.description}</small> : null}
-                                    {repo.language ? <small>{repo.language}</small> : null}
-                                    <small>Last update: {new Date(repo.pushed_at).toLocaleString()}</small>
-                                </li>
-                            ))}
-                    </ul>
-                ) : null}
-                <div className={classes.pagination}>
-                    <button onClick={_prevRepos}>{'<--'}</button>
-                    <small>Page {reposPage}</small>
-                    <button onClick={_nextRepos}>{'-->'}</button>
-                </div>
+        <div className={classes.root + (reposFetch ? ' loading' : '') + (reposPanel ? ' open' : '')}>
+            <div className={classes.header} onClick={_toggleRepos}>
+                <span>
+                    <small>{user.public_repos}</small> Repos
+                </span>
+                <button onClick={_toggleRepos}>{reposPanel ? '^' : 'v'}</button>
             </div>
+
+            {reposPanel ? (
+                <>
+                    {repos && repos.length ? (
+                        <ul className={classes.list}>
+                            {repos
+                                .filter((repo) => !repo.private)
+                                .map((repo) => (
+                                    <li key={repo.id} className={classes.itemList}>
+                                        <button onClick={_openProject(repo.full_name)} className={classes.item}>
+                                            <span>
+                                                <ProgressiveImage
+                                                    fallBack={repo.owner.avatar_url}
+                                                    src={repo.owner.avatar_url}
+                                                    render={(src) => (
+                                                        <img width="30" alt={repo.owner.login} src={src} />
+                                                    )}
+                                                />
+                                            </span>
+                                            <p style={{ fontSize: 20 }}>{repo.name}</p>
+                                        </button>
+                                        {repo.language ? <small>{repo.language}</small> : null}
+                                        {repo.description ? <p>{repo.description}</p> : null}
+                                        <small>Last update: {new Date(repo.pushed_at).toLocaleString()}</small>
+                                    </li>
+                                ))}
+                        </ul>
+                    ) : null}
+                    <div className={classes.pagination}>
+                        <button onClick={_prevRepos}>{'<--'}</button>
+                        <small>Page {reposPage}</small>
+                        <button onClick={_nextRepos}>{'-->'}</button>
+                    </div>
+                </>
+            ) : null}
         </div>
     )
 }

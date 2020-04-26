@@ -61,6 +61,7 @@ const app = server({
                     ]
                         .filter((s) => s !== '')
                         .join('\n')}
+                    <link href="/css/index.css" rel="stylesheet" />
                 </head>
                 <body>
                     <div id="root">${root}</div>

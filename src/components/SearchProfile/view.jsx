@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import useStore from '~/store'
@@ -13,6 +13,7 @@ import {
 import { PATH_PROJECT } from '~/variables/urls'
 
 import ProgressiveImage from '../ProgressiveImage'
+import Dialog from '../Dialog'
 
 import useStyle from './style'
 
@@ -80,48 +81,47 @@ const SearchProfile = () => {
     const queryFetch = isProject ? projectQueryFetch : userQueryFetch
 
     return (
-        <form onSubmit={_submit}>
-            <input
-                value={search}
-                placeholder={isProject ? 'GitHub Repository name' : 'GitHub User name'}
-                onChange={_setSearch}
-            />
-            <button type="submit" onClick={_submit}>
-                Search
-            </button>
+        <>
+            <form onSubmit={_submit} className={classes.form}>
+                <input
+                    className={classes.input}
+                    value={search}
+                    placeholder={isProject ? 'GitHub Repository name' : 'GitHub User name'}
+                    onChange={_setSearch}
+                />
+                <button type="submit" onClick={_submit} className={classes.input + ' button'}>
+                    Search
+                </button>
+            </form>
 
             {queryFetch ? <p>Searching ...</p> : null}
 
-            <div className={classes.dialogContainer + (showQueryResult ? ' open' : '')}>
-                <div className={classes.dialogContent + (queryFetch ? ' loading' : '')}>
-                    <p>Search result for: {search}</p>
-                    <div className={classes.result}>
-                        {query.length
-                            ? query.map((q, i) => (
-                                  <div onClick={_openProfile(q.login || q.full_name)} key={i} className={classes.item}>
+            <Dialog onClose={_closeQuery} open={showQueryResult}>
+                <p>Search result for: {search}</p>
+                <div className={classes.result + (queryFetch ? ' loading' : '')}>
+                    {query.length
+                        ? query.map((q, i) => (
+                              <div key={i} className={classes.item}>
+                                  <button onClick={_openProfile(q.login || q.full_name)} className={classes.itemList}>
                                       <ProgressiveImage
                                           fallBack={q.avatar_url || q.owner.avatar_url}
                                           src={q.avatar_url || q.owner.avatar_url}
-                                          render={(src) => <img alt={q.login || q.name} src={src} />}
+                                          render={(src) => <img width="30" alt={q.login || q.name} src={src} />}
                                       />
                                       <p>{q.login || q.name}</p>
-                                  </div>
-                              ))
-                            : null}
-                    </div>
-
-                    <div className={classes.pagination}>
-                        <button onClick={_prevQuery}>{'<--'}</button>
-                        <small>Page {queryPage}</small>
-                        <button onClick={_nextQuery}>{'-->'}</button>
-                    </div>
-
-                    <button onClick={_closeQuery} autoFocus>
-                        Close
-                    </button>
+                                  </button>
+                              </div>
+                          ))
+                        : null}
                 </div>
-            </div>
-        </form>
+
+                <div className={classes.pagination}>
+                    <button onClick={_prevQuery}>{'<--'}</button>
+                    <small>Page {queryPage}</small>
+                    <button onClick={_nextQuery}>{'-->'}</button>
+                </div>
+            </Dialog>
+        </>
     )
 }
 

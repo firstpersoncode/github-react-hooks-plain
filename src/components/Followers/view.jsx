@@ -20,7 +20,11 @@ const Followers = () => {
     const user = state.user && state.user.selected && Object.keys(state.user.selected).length && state.user.selected
     const { followers, followersPanel, followersPage, followersFetch } = state.user
 
-    const _toggleFollowers = () => {
+    const _toggleFollowers = (e) => {
+        if (e) {
+            e.stopPropagation()
+        }
+
         if (!user) {
             return
         }
@@ -50,35 +54,43 @@ const Followers = () => {
     }
 
     return (
-        <div onClick={_toggleFollowers} className={classes.root + (followersFetch ? ' loading' : '')}>
-            <span>Followers</span>
-            <small>{user.followers}</small>
-            <button onClick={_toggleFollowers}>{'expand'}</button>
-            <div className={classes.body + (followersPanel ? ' open' : '')}>
-                {followers && followers.length ? (
-                    <ul>
-                        {followers
-                            .filter((follower) => !follower.private)
-                            .map((follower) => (
-                                <li key={follower.id} onClick={_openProfile(follower.login)} className={classes.item}>
-                                    <span>
-                                        <ProgressiveImage
-                                            fallBack={follower.avatar_url}
-                                            src={follower.avatar_url}
-                                            render={(src) => <img width="30" alt={follower.login} src={src} />}
-                                        />
-                                    </span>
-                                    <span>{follower.login}</span>
-                                </li>
-                            ))}
-                    </ul>
-                ) : null}
-                <div className={classes.pagination}>
-                    <button onClick={_prevFollowers}>{'<--'}</button>
-                    <small>Page {followersPage}</small>
-                    <button onClick={_nextFollowers}>{'-->'}</button>
-                </div>
+        <div className={classes.root + (followersFetch ? ' loading' : '')}>
+            <div className={classes.header} onClick={_toggleFollowers}>
+                <span>
+                    <small>{user.followers}</small> Followers
+                </span>
+                <button onClick={_toggleFollowers}>{followersPanel ? '^' : 'v'}</button>
             </div>
+            {followersPanel ? (
+                <>
+                    {followers && followers.length ? (
+                        <ul className={classes.list}>
+                            {followers
+                                .filter((follower) => !follower.private)
+                                .map((follower) => (
+                                    <li key={follower.id} className={classes.itemList}>
+                                        <button onClick={_openProfile(follower.login)} className={classes.item}>
+                                            <span>
+                                                <ProgressiveImage
+                                                    fallBack={follower.avatar_url}
+                                                    src={follower.avatar_url}
+                                                    render={(src) => <img width="30" alt={follower.login} src={src} />}
+                                                />
+                                            </span>
+                                            <span>{follower.login}</span>
+                                        </button>
+                                    </li>
+                                ))}
+                        </ul>
+                    ) : null}
+
+                    <div className={classes.pagination}>
+                        <button onClick={_prevFollowers}>{'<--'}</button>
+                        <small>Page {followersPage}</small>
+                        <button onClick={_nextFollowers}>{'-->'}</button>
+                    </div>
+                </>
+            ) : null}
         </div>
     )
 }

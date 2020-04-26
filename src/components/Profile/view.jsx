@@ -39,30 +39,43 @@ const Profile = () => {
 
     return (
         <div className={classes.root + (selectedFetch ? ' loading' : '')}>
-            <h3>{user.name}</h3>
+            <div>
+                <ProgressiveImage
+                    fallBack={user.avatar_url}
+                    src={user.avatar_url}
+                    render={(src) => <img alt={user.name} src={src} className={classes.large} />}
+                />
+            </div>
+            <div className={classes.info}>
+                <h1>{user.name}</h1>
+                <p>
+                    GitHub:{' '}
+                    <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+                        @{user.login}
+                    </a>
+                </p>
+                {user.blog ? (
+                    <p>
+                        Blog / Website:{' '}
+                        <a href={user.blog} target="_blank" rel="noopener noreferrer">
+                            {user.blog}
+                        </a>
+                    </p>
+                ) : null}
+                {user.location ? <p>Location: {user.location}</p> : null}
+                {user.company ? <p>Company: {user.company}</p> : null}
+                {user.bio ? <p>{user.bio}</p> : null}
 
-            <ProgressiveImage
-                fallBack={user.avatar_url}
-                src={user.avatar_url}
-                render={(src) => <img alt={user.name} src={src} className={classes.large} />}
-            />
-
-            <button onClick={_toggleRepos}>{user.public_repos} Repos</button>
-            <button onClick={_toggleFollowings}>{user.following} Following</button>
-            <button onClick={_toggleFollowers}>{user.followers} Followers</button>
-            <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-                @{user.login}
-            </a>
-
-            {user.blog ? (
-                <a href={user.blog} target="_blank" rel="noopener noreferrer">
-                    Blog / WebSite
-                </a>
-            ) : null}
-
-            {user.location ? <p>Location: {user.location}</p> : null}
-            {user.company ? <p>Company: {user.company}</p> : null}
-            {user.bio ? <p>{user.bio}</p> : null}
+                <button style={{ padding: 15 }} onClick={_toggleRepos}>
+                    {user.public_repos} Repos
+                </button>
+                <button style={{ padding: 15 }} onClick={_toggleFollowings}>
+                    {user.following} Following
+                </button>
+                <button style={{ padding: 15 }} onClick={_toggleFollowers}>
+                    {user.followers} Followers
+                </button>
+            </div>
         </div>
     )
 }

@@ -1,34 +1,48 @@
 import { makeStyles } from '@material-ui/styles'
 
 const useStyle = makeStyles(() => ({
-    dialogContainer: {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        display: 'none',
-        '&.open': {
-            display: 'flex'
-        },
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    dialogContent: {
-        '&.loading': {
-            filter: 'blur(4px)'
-        },
-        maxWidth: 450
-    },
     result: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        '&.loading': {
+            filter: 'blur(4px)'
+        }
     },
     item: {
-        width: '30%'
+        width: '25%',
+        padding: 15
+    },
+    itemList: {
+        alignItems: 'center',
+        display: 'flex',
+        '& > *': {
+            padding: 5
+        }
+    },
+    pagination: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        '& > *': {
+            padding: 10
+        }
+    },
+    form: {
+        display: 'flex',
+        alignItems: 'center',
+        '@media only screen and (max-width: 600px)': {
+            display: 'block'
+        }
+    },
+    input: {
+        padding: 15,
+        flex: 1,
+        '&.button': {
+            flex: 0
+        },
+        border: '1px solid rgba(0,0,0,0.3)'
     }
 }))
 

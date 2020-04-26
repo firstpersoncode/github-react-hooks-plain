@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import useStore from '~/store'
 import { SET_USER_EVENTS_NEXT, SET_USER_EVENTS_PREV } from '~/store/user'
@@ -6,6 +6,41 @@ import { SET_USER_EVENTS_NEXT, SET_USER_EVENTS_PREV } from '~/store/user'
 import ProgressiveImage from '../ProgressiveImage'
 
 import useStyle from './style'
+
+const EventCard = ({ user, event }) => {
+    const classes = useStyle()
+    const [payload, setPayload] = useState(false)
+
+    const _togglePayload = () => {
+        setPayload((prev) => !prev)
+    }
+
+    return (
+        <div className={classes.card}>
+            <div className={classes.item}>
+                <ProgressiveImage
+                    fallBack={event.actor.avatar_url}
+                    src={event.actor.avatar_url}
+                    render={(src) => <img width="50" alt={user.name} src={src} />}
+                />
+                <a href={`https://github.com/${event.repo.name}`} target="_blank" rel="noopener noreferrer">
+                    {event.repo.name}
+                </a>
+                <small>{event.type}</small>
+                <button style={{ padding: 10 }} onClick={_togglePayload}>
+                    {payload ? '^' : 'v'}
+                </button>
+            </div>
+
+            <div className={classes.payload + (payload ? ' open' : '')}>
+                <pre>{JSON.stringify(event.payload, null, '\t')}</pre>
+            </div>
+            <p style={{ textAlign: 'right' }}>
+                <small>{new Date(event.created_at).toLocaleString()}</small>
+            </p>
+        </div>
+    )
+}
 
 const Events = () => {
     const classes = useStyle()
@@ -35,26 +70,7 @@ const Events = () => {
             {events && events.length
                 ? events
                       .filter((event) => event.public)
-                      .map((event) => (
-                          <div key={event.id}>
-                              <ProgressiveImage
-                                  fallBack={event.actor.avatar_url}
-                                  src={event.actor.avatar_url}
-                                  render={(src) => <img width="30" alt={user.name} src={src} />}
-                              />
-                              <a
-                                  href={`https://github.com/${event.repo.name}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer">
-                                  {event.repo.name}
-                              </a>
-                              <small>{new Date(event.created_at).toLocaleString()}</small>
-                              <small>{event.type}</small>
-                              <div className={classes.payload}>
-                                  <pre>{JSON.stringify(event.payload, null, '\t')}</pre>
-                              </div>
-                          </div>
-                      ))
+                      .map((event, i) => <EventCard key={i} user={user} event={event} />)
                 : null}
             <div className={classes.pagination}>
                 <button onClick={_prevEvents}>{'<--'}</button>
