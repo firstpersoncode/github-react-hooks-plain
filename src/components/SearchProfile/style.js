@@ -31,10 +31,7 @@ const useStyle = makeStyles(() => ({
     },
     form: {
         display: 'flex',
-        alignItems: 'center',
-        '@media only screen and (max-width: 600px)': {
-            display: 'block'
-        }
+        alignItems: 'center'
     },
     input: {
         padding: 15,

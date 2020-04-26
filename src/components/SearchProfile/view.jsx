@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import useStore from '~/store'
-import { SET_USER_SELECTED, SET_USER_EVENTS_NEXT, SET_USER_QUERY, SET_USER_QUERY_PREV } from '~/store/user'
+import { SET_USER_SELECTED, SET_USER_EVENTS_NEXT, SET_USER_QUERY, SET_USER_QUERY_PREV } from '~/store/user/constant'
 import {
     SET_PROJECT_SELECTED,
     SET_PROJECT_CONTENTS,
     SET_PROJECT_LANGUAGES,
     SET_PROJECT_QUERY,
     SET_PROJECT_QUERY_PREV
-} from '~/store/project'
+} from '~/store/project/constant'
 import { PATH_PROJECT } from '~/variables/urls'
 
 import ProgressiveImage from '../ProgressiveImage'
@@ -104,7 +104,7 @@ const SearchProfile = () => {
                               <div key={i} className={classes.item}>
                                   <button onClick={_openProfile(q.login || q.full_name)} className={classes.itemList}>
                                       <ProgressiveImage
-                                          fallBack={q.avatar_url || q.owner.avatar_url}
+                                          fallBack="/img/placeholder-square.jpg"
                                           src={q.avatar_url || q.owner.avatar_url}
                                           render={(src) => <img width="30" alt={q.login || q.name} src={src} />}
                                       />

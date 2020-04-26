@@ -7,54 +7,7 @@ import {
     ENDPOINT_GITHUB_USER_QUERY
 } from '~/variables/urls'
 
-// ACTION TYPES
-export const SET_USER_QUERY = 'SET/USER/QUERY'
-export const SET_USER_QUERY_PREV = 'SET/USER/QUERY/PREV'
-
-export const SET_USER_SELECTED = 'SET/USER/SELECTED'
-
-export const SET_USER_EVENTS_NEXT = 'SET/USER/EVENTS/NEXT'
-export const SET_USER_EVENTS_PREV = 'SET/USER/EVENTS/PREV'
-
-export const SET_USER_REPOS_PANEL = 'SET/USER/REPOS/PANEL'
-export const SET_USER_REPOS_NEXT = 'SET/USER/REPOS/NEXT'
-export const SET_USER_REPOS_PREV = 'SET/USER/REPOS/PREV'
-
-export const SET_USER_FOLLOWINGS_PANEL = 'SET/USER/FOLLOWINGS/PANEL'
-export const SET_USER_FOLLOWINGS_NEXT = 'SET/USER/FOLLOWINGS/NEXT'
-export const SET_USER_FOLLOWINGS_PREV = 'SET/USER/FOLLOWINGS/PREV'
-
-export const SET_USER_FOLLOWERS_PANEL = 'SET/USER/FOLLOWERS/PANEL'
-export const SET_USER_FOLLOWERS_NEXT = 'SET/USER/FOLLOWERS/NEXT'
-export const SET_USER_FOLLOWERS_PREV = 'SET/USER/FOLLOWERS/PREV'
-
-export const userState = {
-    query: [],
-    queryFetch: false,
-    queryPage: 0,
-
-    selected: {},
-    selectedFetch: false,
-
-    events: [],
-    eventsFetch: false,
-    eventsPage: 0,
-
-    repos: [],
-    reposFetch: false,
-    reposPanel: false,
-    reposPage: 0,
-
-    followings: [],
-    followingsFetch: false,
-    followingsPanel: false,
-    followingsPage: 0,
-
-    followers: [],
-    followersFetch: false,
-    followersPanel: false,
-    followersPage: 0
-}
+import { userState } from './state'
 
 export const setUserQuery = async (setState, setError, q, next) => {
     let currPage = 0

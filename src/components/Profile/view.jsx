@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react'
 
 import useStore from '~/store'
-import { SET_USER_REPOS_PANEL, SET_USER_FOLLOWINGS_PANEL, SET_USER_FOLLOWERS_PANEL } from '~/store/user'
+import { SET_USER_REPOS_PANEL, SET_USER_FOLLOWINGS_PANEL, SET_USER_FOLLOWERS_PANEL } from '~/store/user/constant'
 
 import ProgressiveImage from '../ProgressiveImage'
 
@@ -41,7 +41,7 @@ const Profile = () => {
         <div className={classes.root + (selectedFetch ? ' loading' : '')}>
             <div>
                 <ProgressiveImage
-                    fallBack={user.avatar_url}
+                    fallBack="/img/placeholder-square.jpg"
                     src={user.avatar_url}
                     render={(src) => <img alt={user.name} src={src} className={classes.large} />}
                 />

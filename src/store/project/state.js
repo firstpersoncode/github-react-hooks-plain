@@ -1,0 +1,14 @@
+export const projectState = {
+    query: [],
+    queryFetch: false,
+    queryPage: 0,
+
+    selected: {},
+    selectedFetch: false,
+
+    contents: [],
+    contentsFetch: false,
+
+    languages: [],
+    languagesFetch: false
+}

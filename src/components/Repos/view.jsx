@@ -2,8 +2,8 @@ import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import useStore from '~/store'
-import { SET_USER_REPOS_NEXT, SET_USER_REPOS_PREV, SET_USER_REPOS_PANEL } from '~/store/user'
-import { SET_PROJECT_SELECTED, SET_PROJECT_CONTENTS, SET_PROJECT_LANGUAGES } from '~/store/project'
+import { SET_USER_REPOS_NEXT, SET_USER_REPOS_PREV, SET_USER_REPOS_PANEL } from '~/store/user/constant'
+import { SET_PROJECT_SELECTED, SET_PROJECT_CONTENTS, SET_PROJECT_LANGUAGES } from '~/store/project/constant'
 import ProgressiveImage from '~/components/ProgressiveImage'
 
 import useStyle from './style'
@@ -76,7 +76,7 @@ const Repos = () => {
                                         <button onClick={_openProject(repo.full_name)} className={classes.item}>
                                             <span>
                                                 <ProgressiveImage
-                                                    fallBack={repo.owner.avatar_url}
+                                                    fallBack="/img/placeholder-square.jpg"
                                                     src={repo.owner.avatar_url}
                                                     render={(src) => (
                                                         <img width="30" alt={repo.owner.login} src={src} />

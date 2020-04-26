@@ -7,7 +7,7 @@ import {
     SET_USER_FOLLOWINGS_PANEL,
     SET_USER_SELECTED,
     SET_USER_EVENTS_NEXT
-} from '~/store/user'
+} from '~/store/user/constant'
 
 import ProgressiveImage from '../ProgressiveImage'
 
@@ -72,7 +72,7 @@ const Followings = () => {
                                         <button onClick={_openProfile(following.login)} className={classes.item}>
                                             <span>
                                                 <ProgressiveImage
-                                                    fallBack={following.avatar_url}
+                                                    fallBack="/img/placeholder-square.jpg"
                                                     src={following.avatar_url}
                                                     render={(src) => <img width="30" alt={following.login} src={src} />}
                                                 />

@@ -5,7 +5,7 @@ import marked from 'marked'
 
 import useStore, { SET_ERROR } from '~/store'
 import ProgressiveImage from '~/components/ProgressiveImage'
-import { SET_USER_SELECTED, SET_USER_EVENTS_NEXT } from '~/store/user'
+import { SET_USER_SELECTED, SET_USER_EVENTS_NEXT } from '~/store/user/constant'
 import { PATH_ROOT } from '~/variables/urls'
 
 import useStyle from './style'
@@ -76,7 +76,7 @@ const Project = () => {
                     <h1>{project.name}</h1>
                     <button onClick={_openProfile(project.owner.login)} className={classes.profile}>
                         <ProgressiveImage
-                            fallBack={project.owner.avatar_url}
+                            fallBack="/img/placeholder-square.jpg"
                             src={project.owner.avatar_url}
                             render={(src) => <img width="20" alt={project.owner.login} src={src} />}
                         />

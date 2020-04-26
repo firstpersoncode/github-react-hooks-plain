@@ -5,28 +5,7 @@ import {
     ENDPOINT_GITHUB_PROJECT_QUERY
 } from '~/variables/urls'
 
-// ACTION TYPES
-export const SET_PROJECT_QUERY = 'SET/PROJECT/QUERY'
-export const SET_PROJECT_QUERY_PREV = 'SET/PROJECT/QUERY/PREV'
-
-export const SET_PROJECT_SELECTED = 'SET/PROJECT/SELECTED'
-export const SET_PROJECT_CONTENTS = 'SET/PROJECT/CONTENTS'
-export const SET_PROJECT_LANGUAGES = 'SET/PROJECT/LANGUAGES'
-
-export const projectState = {
-    query: [],
-    queryFetch: false,
-    queryPage: 0,
-
-    selected: {},
-    selectedFetch: false,
-
-    contents: [],
-    contentsFetch: false,
-
-    languages: [],
-    languagesFetch: false
-}
+import { projectState } from './state'
 
 export const setProjectQuery = async (setState, setError, q, next) => {
     let currPage = 0

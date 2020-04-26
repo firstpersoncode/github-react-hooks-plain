@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import useStore from '~/store'
-import { SET_USER_EVENTS_NEXT, SET_USER_EVENTS_PREV } from '~/store/user'
+import { SET_USER_EVENTS_NEXT, SET_USER_EVENTS_PREV } from '~/store/user/constant'
 
 import ProgressiveImage from '../ProgressiveImage'
 
@@ -19,7 +19,7 @@ const EventCard = ({ user, event }) => {
         <div className={classes.card}>
             <div className={classes.item}>
                 <ProgressiveImage
-                    fallBack={event.actor.avatar_url}
+                    fallBack="/img/placeholder-square.jpg"
                     src={event.actor.avatar_url}
                     render={(src) => <img width="50" alt={user.name} src={src} />}
                 />

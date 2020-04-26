@@ -1,7 +1,7 @@
 import { useState, createContext, useContext } from 'react'
 
+import { userState } from './user/state'
 import {
-    userState,
     setUserSelected,
     setUserRepos,
     setUserEvents,
@@ -10,6 +10,9 @@ import {
     setUserReposPanel,
     setUserFollowingsPanel,
     setUserFollowersPanel,
+    setUserQuery
+} from './user'
+import {
     SET_USER_SELECTED,
     SET_USER_EVENTS_NEXT,
     SET_USER_EVENTS_PREV,
@@ -23,21 +26,17 @@ import {
     SET_USER_FOLLOWINGS_PANEL,
     SET_USER_FOLLOWERS_PANEL,
     SET_USER_QUERY,
-    SET_USER_QUERY_PREV,
-    setUserQuery
-} from './user'
+    SET_USER_QUERY_PREV
+} from './user/constant'
+import { setProjectSelected, setProjectContents, setProjectLanguages, setProjectQuery } from './project'
+import { projectState } from './project/state'
 import {
-    projectState,
-    setProjectSelected,
-    setProjectContents,
     SET_PROJECT_SELECTED,
     SET_PROJECT_CONTENTS,
     SET_PROJECT_LANGUAGES,
-    setProjectLanguages,
     SET_PROJECT_QUERY,
-    setProjectQuery,
     SET_PROJECT_QUERY_PREV
-} from './project'
+} from './project/constant'
 
 export const SET_ERROR = 'SET/ERROR'
 
