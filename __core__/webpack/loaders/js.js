@@ -1,3 +1,12 @@
+/*
+    __core__/webpack/loaders/js
+
+    Babel loader
+    see: https://www.npmjs.com/package/babel-loader
+
+    To transpiling the js files
+*/
+
 const babelLoader = {
     loader: require.resolve('babel-loader'),
     options: {

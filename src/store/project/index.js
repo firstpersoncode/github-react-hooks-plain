@@ -1,3 +1,10 @@
+/*
+    src/store/project
+
+    Effects, actions and dispatcher for managing the project state
+    creating request to GitHub server
+*/
+
 import {
     ENDPOINT_GITHUB_PROJECT_NAME,
     ENDPOINT_GITHUB_PROJECT_CONTENT,

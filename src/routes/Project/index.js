@@ -1,4 +1,14 @@
+/*
+    src/routes/Home
+
+    Home route
+
+    contain:
+        - ProgressiveImage
+*/
+
 import Loadable from 'react-loadable'
+
 import { PATH_PROJECT } from '~/variables/urls'
 
 const ProjectPromise = Loadable({

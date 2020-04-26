@@ -1,3 +1,16 @@
+/*
+    src/routes/Project/view
+
+    Project route view
+    inject raw markdown into dom using "marked"
+    see: https://www.npmjs.com/package/marked
+
+    _fetchMarkdown request to raw file of the README.md project, set then render the markdown state
+    _openProfile for trigger the request to GitHub server, return user info based on clicked owner
+
+    Render project info and its README.md file
+*/
+
 import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useHistory, Link } from 'react-router-dom'
@@ -6,7 +19,6 @@ import marked from 'marked'
 import useStore, { SET_ERROR } from '~/store'
 import ProgressiveImage from '~/components/ProgressiveImage'
 import { SET_USER_SELECTED, SET_USER_EVENTS_NEXT } from '~/store/user/constant'
-import { PATH_ROOT } from '~/variables/urls'
 
 import useStyle from './style'
 
@@ -60,6 +72,7 @@ const Project = () => {
         await actions({ type: SET_USER_SELECTED, payload: userName })
         actions({ type: SET_USER_EVENTS_NEXT, payload: userName })
     }
+
     return (
         <>
             <Helmet>

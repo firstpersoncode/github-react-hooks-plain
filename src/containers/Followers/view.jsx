@@ -1,3 +1,16 @@
+/*
+    src/containers/Followers/view
+
+    Followers container view
+
+    _toggleFollowers for toggle the visible of the followers
+    _nextFollowers for trigger the request to GitHub server, return next list of followers
+    _prevFollowers for trigger the request to GitHub server, return previous list of followers
+    _openProfile for trigger the request to GitHub server, return user info based on clicked follower
+
+    Render list of followers
+*/
+
 import React from 'react'
 
 import useStore from '~/store'
@@ -8,8 +21,7 @@ import {
     SET_USER_SELECTED,
     SET_USER_EVENTS_NEXT
 } from '~/store/user/constant'
-
-import ProgressiveImage from '../ProgressiveImage'
+import UserCard from '~/components/UserCard'
 
 import useStyle from './style'
 
@@ -49,6 +61,7 @@ const Followers = () => {
     }
 
     const _openProfile = (userName) => async () => {
+        window.scrollTo(0, 0)
         await actions({ type: SET_USER_SELECTED, payload: userName })
         actions({ type: SET_USER_EVENTS_NEXT, payload: userName })
     }
@@ -68,17 +81,8 @@ const Followers = () => {
                             {followers
                                 .filter((follower) => !follower.private)
                                 .map((follower) => (
-                                    <li key={follower.id} className={classes.itemList}>
-                                        <button onClick={_openProfile(follower.login)} className={classes.item}>
-                                            <span>
-                                                <ProgressiveImage
-                                                    fallBack="/img/placeholder-square.jpg"
-                                                    src={follower.avatar_url}
-                                                    render={(src) => <img width="30" alt={follower.login} src={src} />}
-                                                />
-                                            </span>
-                                            <span>{follower.login}</span>
-                                        </button>
+                                    <li key={follower.id}>
+                                        <UserCard user={follower} onClick={_openProfile(follower.login)} />
                                     </li>
                                 ))}
                         </ul>

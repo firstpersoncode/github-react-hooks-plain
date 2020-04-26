@@ -1,5 +1,21 @@
+/*
+    src/containers/Header/view
+
+    Header container view
+
+    check if header in project page or root page using useLocation hook
+    _setSearch for input controller
+    _submit for submitting and request to GitHub server, returning list of query (user, project)
+    _closeQueryResult for closing the dialog search result
+    _nextQuery for requesting to GitHub server, returning next list of query (user, project)
+    _prevQuery for requesting to GitHub server, returning prev list of query (user, project)
+    _openProfile for closing the dialog result and trigger the request to GitHub server, return user info based on clicked query
+
+    Render search bar, page navigation and dialog of search result
+*/
+
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 
 import useStore from '~/store'
 import { SET_USER_SELECTED, SET_USER_EVENTS_NEXT, SET_USER_QUERY, SET_USER_QUERY_PREV } from '~/store/user/constant'
@@ -11,13 +27,12 @@ import {
     SET_PROJECT_QUERY_PREV
 } from '~/store/project/constant'
 import { PATH_PROJECT } from '~/variables/urls'
-
-import ProgressiveImage from '../ProgressiveImage'
-import Dialog from '../Dialog'
+import ProgressiveImage from '~/components/ProgressiveImage'
+import Dialog from '~/components/Dialog'
 
 import useStyle from './style'
 
-const SearchProfile = () => {
+const Header = () => {
     const classes = useStyle()
     const { state, actions } = useStore()
     const [search, setSearch] = useState('')
@@ -44,7 +59,7 @@ const SearchProfile = () => {
         }
     }
 
-    const _closeQuery = () => {
+    const _closeQueryResult = () => {
         setShowQueryResult(false)
     }
 
@@ -65,7 +80,8 @@ const SearchProfile = () => {
     }
 
     const _openProfile = (selected) => async () => {
-        _closeQuery()
+        window.scrollTo(0, 0)
+        _closeQueryResult()
         if (isProject) {
             await actions({ type: SET_PROJECT_SELECTED, payload: selected })
             await actions({ type: SET_PROJECT_CONTENTS, payload: selected })
@@ -82,21 +98,27 @@ const SearchProfile = () => {
 
     return (
         <>
-            <form onSubmit={_submit} className={classes.form}>
-                <input
-                    className={classes.input}
-                    value={search}
-                    placeholder={isProject ? 'GitHub Repository name' : 'GitHub User name'}
-                    onChange={_setSearch}
-                />
-                <button type="submit" onClick={_submit} className={classes.input + ' button'}>
-                    Search
-                </button>
-            </form>
+            <header className={classes.root}>
+                <div className={classes.nav}>
+                    <Link to="/">Profile</Link>
+                    <Link to="/project">Project</Link>
+                </div>
+                <form onSubmit={_submit} className={classes.form}>
+                    <input
+                        className={classes.input}
+                        value={search}
+                        placeholder={isProject ? 'GitHub Repository name' : 'GitHub User name'}
+                        onChange={_setSearch}
+                    />
+                    <button type="submit" onClick={_submit} className={classes.input + ' button'}>
+                        Search
+                    </button>
+                </form>
 
-            {queryFetch ? <p>Searching ...</p> : null}
+                {queryFetch ? <span>Searching ...</span> : null}
+            </header>
 
-            <Dialog onClose={_closeQuery} open={showQueryResult}>
+            <Dialog onClose={_closeQueryResult} open={showQueryResult}>
                 <p>Search result for: {search}</p>
                 <div className={classes.result + (queryFetch ? ' loading' : '')}>
                     {query.length
@@ -125,4 +147,4 @@ const SearchProfile = () => {
     )
 }
 
-export default SearchProfile
+export default Header

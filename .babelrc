@@ -5,5 +5,10 @@
         "@babel/plugin-proposal-object-rest-spread",
         "@babel/plugin-syntax-dynamic-import",
         "react-loadable/babel"
-    ]
+    ],
+    "env": {
+        "test": {
+            "plugins": ["@babel/plugin-transform-runtime"]
+        }
+    }
 }

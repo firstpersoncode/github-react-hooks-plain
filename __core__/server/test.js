@@ -4,29 +4,29 @@ import server from '.'
 
 jest.useFakeTimers()
 
-const routes = [
-    {
-        component: jest.fn(),
-        path: '/',
-        exact: true
-    },
-    {
-        // mock 404 (default route)
-        component: jest.fn(),
-        path: '**'
-    }
-]
-
-const app = server({
-    rootPath: '/',
-    render: async (_) => ({
-        html: '<!doctype html><html><head><title>test</title></head><body>test ..</body></html>',
-        routeCtx: { status: null, url: null }
-    }),
-    routes
-})
-
 describe('Configure server', () => {
+    const routes = [
+        {
+            component: jest.fn(),
+            path: '/',
+            exact: true
+        },
+        {
+            // mock 404 (default route)
+            component: jest.fn(),
+            path: '**'
+        }
+    ]
+
+    const app = server({
+        rootPath: '/',
+        render: async (_) => ({
+            html: '<!doctype html><html><head><title>test</title></head><body>test ..</body></html>',
+            routeCtx: { status: null, url: null }
+        }),
+        routes
+    })
+
     test('GET: "/" Should response 200 and return html file', async () => {
         const response = await request(app).get('/')
         expect(response.statusCode).toBe(200)

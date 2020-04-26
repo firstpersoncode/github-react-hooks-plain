@@ -1,12 +1,20 @@
+/*
+    src/routes/Home/view
+
+    Home route view
+
+    Render user info
+*/
+
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
 
 import useStore from '~/store'
-import Profile from '~/components/Profile'
-import Events from '~/components/Events'
-import Repos from '~/components/Repos'
-import Followings from '~/components/Followings'
-import Followers from '~/components/Followers'
+import Profile from '~/containers/Profile'
+import Events from '~/containers/Events'
+import Repos from '~/containers/Repos'
+import Followings from '~/containers/Followings'
+import Followers from '~/containers/Followers'
 
 import useStyle from './style'
 

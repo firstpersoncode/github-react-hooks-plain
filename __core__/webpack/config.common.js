@@ -1,3 +1,16 @@
+/*
+    __core__/webpack/config.common
+
+    config for both dev and prod environtment
+    see: https://webpack.js.org/configuration/
+
+    output: dist
+    loaders: file-loader, babel-loader
+    plugins:
+        - global variable env for client side
+        - react loadable ssr addon for splitted chunk on server side
+*/
+
 const path = require('path')
 const { DefinePlugin } = require('webpack')
 const ReactLoadableSSRAddon = require('react-loadable-ssr-addon')

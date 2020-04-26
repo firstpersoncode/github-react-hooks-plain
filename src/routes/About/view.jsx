@@ -1,3 +1,11 @@
+/*
+    src/routes/About/view
+
+    About route view
+
+    Render about page
+*/
+
 import React from 'react'
 import { Helmet } from 'react-helmet-async'
 

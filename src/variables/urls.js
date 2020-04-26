@@ -1,14 +1,18 @@
-/* HOSTS */
-const HOST_GOOGLE_CDN = 'https://fonts.googleapis.com'
+/*
+    src/variables/urls
 
-/* API */
+    Reusable variable for hosts, cdns, pathnames, endpoints
+*/
+
+/* ================ HOSTS ================ */
+const HOST_GOOGLE_CDN = 'https://fonts.googleapis.com'
 export const GITHUB_HOST_API = 'https://api.github.com'
 
-/* CDNS */
+/* ================ CDNS ================ */
 export const CDN_MATERIALUI_ICONS = HOST_GOOGLE_CDN + '/icon?family=Material+Icons'
 export const CDN_GOOGLE_FONT_STYLES = HOST_GOOGLE_CDN + '/css?family=Roboto+Condensed:300,400,500,700'
 
-/* ROUTING */
+/* ================ PATHNAME ================ */
 // always end slug with `/` for better SEO
 // that should indicate that we are in the root of the parent slug
 export const PATH_ROOT = '/'
@@ -17,7 +21,7 @@ export const PATH_PROJECT = PATH_ROOT + 'project/'
 // about
 export const PATH_ABOUT = PATH_ROOT + 'about/'
 
-// ENDPOINT
+/* ================ ENDPOINT ================ */
 // except for endpoints, do not end slug with `/`
 const clientId = process.env.APP_CLIENT
 const clientSecret = process.env.APP_SECRET
@@ -75,7 +79,6 @@ export const ENDPOINT_GITHUB_USER_FOLLOWER = (userName, page) =>
     clientId +
     '&client_secret=' +
     clientSecret
-
 // project
 export const ENDPOINT_GITHUB_PROJECT = GITHUB_HOST_API + '/repos'
 export const ENDPOINT_GITHUB_PROJECT_QUERY = (q, page) =>

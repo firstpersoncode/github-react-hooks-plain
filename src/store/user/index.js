@@ -1,3 +1,10 @@
+/*
+    src/store/user
+
+    Effects, actions and dispatcher for managing the user state
+    creating request to GitHub server
+*/
+
 import {
     ENDPOINT_GITHUB_USER_NAME,
     ENDPOINT_GITHUB_USER_EVENT,

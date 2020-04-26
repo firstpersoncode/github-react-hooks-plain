@@ -1,9 +1,20 @@
-import React, { FunctionComponent } from 'react'
+/*
+    src/containers/Profile/view
+
+    Profile container view
+
+    _toggleRepos for toggle repository panel on sidebar
+    _toggleFollowings for toggle followings panel on sidebar
+    _toggleFollowers for toggle followers panel on sidebar
+
+    Render user info and avatar, display following, followers and repos count
+*/
+
+import React from 'react'
 
 import useStore from '~/store'
 import { SET_USER_REPOS_PANEL, SET_USER_FOLLOWINGS_PANEL, SET_USER_FOLLOWERS_PANEL } from '~/store/user/constant'
-
-import ProgressiveImage from '../ProgressiveImage'
+import ProgressiveImage from '~/components/ProgressiveImage'
 
 import useStyle from './style'
 

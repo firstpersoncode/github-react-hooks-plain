@@ -1,3 +1,15 @@
+/*
+    src/__app__/AppContainer
+
+    App container
+    wrap all components, containers, and routes
+
+    display error on making request to GitHub server
+
+    trigger the callback function anytime the path changed and before loading the route
+    defined in route config of the component "routes > Component > index"
+*/
+
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
@@ -12,7 +24,7 @@ import Dialog from '~/components/Dialog'
 
 import useStyle from './style'
 
-const App = () => {
+const AppContainer = () => {
     const classes = useStyle()
 
     const { pathname } = useLocation()
@@ -20,6 +32,7 @@ const App = () => {
 
     useEffect(() => {
         matchRoutes(routes, pathname).forEach(({ route, match }) => {
+            window.scrollTo(0, 0)
             if (route.exact && route.loadData) {
                 route.loadData(store, { route, match })
             }
@@ -54,4 +67,4 @@ const App = () => {
     )
 }
 
-export default App
+export default AppContainer

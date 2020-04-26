@@ -1,3 +1,9 @@
+/*
+    src/store/user/constants
+
+    User constants for dispatching
+*/
+
 export const SET_USER_QUERY = 'SET/USER/QUERY'
 export const SET_USER_QUERY_PREV = 'SET/USER/QUERY/PREV'
 

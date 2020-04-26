@@ -8,14 +8,14 @@ const useStyle = makeStyles(() => ({
         }
     },
     main: {
-        width: '70%',
+        width: '60%',
         padding: 15,
         '@media only screen and (max-width: 600px)': {
             width: '100%'
         }
     },
     side: {
-        width: '30%',
+        width: '40%',
         padding: 15,
         '@media only screen and (max-width: 600px)': {
             width: '100%'

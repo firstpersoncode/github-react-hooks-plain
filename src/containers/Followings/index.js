@@ -1,3 +1,12 @@
+/*
+    src/containers/Followings
+
+    Followings container
+
+    contain:
+        - UserCard
+*/
+
 import Loadable from 'react-loadable-visibility/react-loadable'
 
 const Followings = Loadable({

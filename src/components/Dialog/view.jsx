@@ -1,3 +1,16 @@
+/*
+    src/components/Dialog/view
+
+    Dialog component view
+
+    @param {Object} props - Dialog props
+    @param {JSXElement} props.children - Render JSX inside Dialog
+    @param {boolean} props.open - state for opening and closing the dialog
+    @param {Function} props.onClose - close Dialog handler
+
+    Render dialog
+*/
+
 import React from 'react'
 
 import useStyle from './style'

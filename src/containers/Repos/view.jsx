@@ -1,3 +1,16 @@
+/*
+    src/containers/Repos/view
+
+    Repos container view
+
+    _toggleRepos for toggle the visible of the repos
+    _nextRepos for trigger the request to GitHub server, return next list of repos
+    _prevRepos for trigger the request to GitHub server, return previous list of repos
+    _openProject for trigger the request to GitHub server, return project info based on clicked repo and redirect to project page
+
+    Render list of repos
+*/
+
 import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 

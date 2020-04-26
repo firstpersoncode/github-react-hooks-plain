@@ -1,6 +1,19 @@
-import Loadable from 'react-loadable'
-import { PATH_ROOT } from '~/variables/urls'
+/*
+    src/routes/Home
 
+    Home route
+
+    contain:
+        - Profile
+        - Events
+        - Repos
+        - Followings
+        - Followers
+*/
+
+import Loadable from 'react-loadable'
+
+import { PATH_ROOT } from '~/variables/urls'
 import { SET_USER_EVENTS_NEXT, SET_USER_SELECTED } from '~/store/user/constant'
 
 const HomePromise = Loadable({

@@ -1,3 +1,12 @@
+/*
+    src/containers/Repos
+
+    Repos container
+
+    contain:
+        - ProgressiveImage
+*/
+
 import Loadable from 'react-loadable-visibility/react-loadable'
 
 const Repos = Loadable({

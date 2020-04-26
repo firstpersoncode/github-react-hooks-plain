@@ -28,17 +28,6 @@ const useStyle = makeStyles(() => ({
     },
     list: {
         listStyle: 'none'
-    },
-    itemList: {
-        borderBottom: '1px solid rgba(0,0,0,0.3)',
-        padding: 15
-    },
-    item: {
-        alignItems: 'center',
-        display: 'flex',
-        '& > *': {
-            padding: 5
-        }
     }
 }))
 

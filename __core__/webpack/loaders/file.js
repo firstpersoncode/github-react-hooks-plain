@@ -1,10 +1,10 @@
-// const urlLoader = {
-//     loader: require.resolve('url-loader'),
-//     options: {
-//         limit: 2048,
-//         name: '[name].[hash:8].[ext]',
-//     },
-// }
+/*
+    __core__/webpack/loaders/file
+
+    File loader in client from static folder
+    see: https://www.npmjs.com/package/file-loader
+    eg: <img src="path/to/static/file.png" />
+*/
 
 const fileLoader = {
     loader: require.resolve('file-loader'),

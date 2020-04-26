@@ -13,7 +13,8 @@ const useStyle = makeStyles(() => ({
             display: 'flex'
         },
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        zIndex: 20000
     },
     dialogContent: {
         '&.loading': {

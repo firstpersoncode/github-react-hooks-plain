@@ -1,3 +1,16 @@
+/*
+    src/components/ProgressiveImage/view
+
+    ProgressiveImage component view
+    lazy load img using this component, with placeholder before the real img is rendered.
+
+    @param {Object} props - ProgressiveImage props
+    @param {Function(src: string)} props.render - Function that return the placeholder / the real source of img
+    @param {string} props.fallBack - the img source that will be rendered before the real source is rendered
+
+    Render img
+*/
+
 import React, { useState, useEffect } from 'react'
 
 const ProgressiveImage = ({ src, render, fallBack }) => {

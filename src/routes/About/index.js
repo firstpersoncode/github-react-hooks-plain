@@ -1,3 +1,9 @@
+/*
+    src/routes/About
+
+    About route
+*/
+
 import Loadable from 'react-loadable'
 
 import { PATH_ABOUT } from '~/variables/urls'

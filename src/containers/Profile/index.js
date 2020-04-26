@@ -1,3 +1,12 @@
+/*
+    src/containers/Profile
+
+    Profile container
+
+    contain:
+        - ProgressiveImage
+*/
+
 import Loadable from 'react-loadable-visibility/react-loadable'
 
 const Profile = Loadable({

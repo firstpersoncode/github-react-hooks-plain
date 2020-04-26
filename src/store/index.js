@@ -1,3 +1,12 @@
+/*
+    src/store
+
+    Global state configuration
+    useConfigStore - function that returns state and actions, and will be injected into React Context
+    Context - will wrap and provide the global state and actions across the components
+    useStore - will return global state and actions, can be used as component hook
+*/
+
 import { useState, createContext, useContext } from 'react'
 
 import { userState } from './user/state'

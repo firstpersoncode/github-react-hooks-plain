@@ -1,3 +1,9 @@
+/*
+    src/store/project/state
+
+    Data structure for Project state
+*/
+
 export const projectState = {
     query: [],
     queryFetch: false,

@@ -1,3 +1,17 @@
+/*
+    __core__/webpack/config.common
+
+    config for prod environtment only
+    see: https://webpack.js.org/configuration/
+
+    input: regenerator-runtime, src/__app__/client
+    optimization: minimize, split chunks
+    plugins:
+        - built in webpack plugins
+            - module concate
+            - no emit on errors
+*/
+
 const path = require('path')
 const {
     optimize: { ModuleConcatenationPlugin },

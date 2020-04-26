@@ -1,3 +1,9 @@
+/*
+    src/store/user/state
+
+    Data structure for User state
+*/
+
 export const userState = {
     query: [],
     queryFetch: false,

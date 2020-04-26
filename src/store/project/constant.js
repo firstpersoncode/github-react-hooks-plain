@@ -1,3 +1,9 @@
+/*
+    src/store/project/constants
+
+    Project constants for dispatching
+*/
+
 export const SET_PROJECT_QUERY = 'SET/PROJECT/QUERY'
 export const SET_PROJECT_QUERY_PREV = 'SET/PROJECT/QUERY/PREV'
 
