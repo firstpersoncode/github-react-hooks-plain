@@ -20,6 +20,15 @@ const useStyle = makeStyles(() => ({
         '@media only screen and (max-width: 600px)': {
             width: '100%'
         }
+    },
+    history: {
+        display: 'flex',
+        alignItems: 'center',
+        '& > *': {
+            padding: 5,
+            margin: 5
+        },
+        flexWrap: 'wrap'
     }
 }))
 

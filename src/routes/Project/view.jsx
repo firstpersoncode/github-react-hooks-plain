@@ -17,8 +17,15 @@ import { useHistory, Link } from 'react-router-dom'
 import marked from 'marked'
 
 import useStore, { SET_ERROR } from '~/store'
+import UserCard from '~/components/UserCard'
 import ProgressiveImage from '~/components/ProgressiveImage'
 import { SET_USER_SELECTED, SET_USER_EVENTS_NEXT } from '~/store/user/constant'
+import {
+    SET_PROJECT_SELECTED,
+    SET_PROJECT_CONTENTS,
+    SET_PROJECT_LANGUAGES,
+    SET_PROJECT_CONTRIBUTORS
+} from '~/store/project/constant'
 
 import useStyle from './style'
 
@@ -35,7 +42,8 @@ const Project = () => {
         languages,
         languagesFetch,
         contributors,
-        contributorsFetch
+        contributorsFetch,
+        history: projectHistory
     } = state.project
 
     const [markdown, setMarkdown] = useState('')
@@ -81,6 +89,13 @@ const Project = () => {
         actions({ type: SET_USER_EVENTS_NEXT, payload: userName })
     }
 
+    const _openProject = (projectName) => async () => {
+        await actions({ type: SET_PROJECT_SELECTED, payload: projectName })
+        await actions({ type: SET_PROJECT_CONTRIBUTORS, payload: projectName })
+        await actions({ type: SET_PROJECT_CONTENTS, payload: projectName })
+        actions({ type: SET_PROJECT_LANGUAGES, payload: projectName })
+    }
+
     return (
         <>
             <Helmet>
@@ -94,15 +109,24 @@ const Project = () => {
 
             {project ? (
                 <div className={classes.root + (selectedFetch ? ' loading' : '')}>
+                    <div className={classes.history}>
+                        Search history:{' '}
+                        {projectHistory.length
+                            ? projectHistory.map((h, i) => (
+                                  <button key={i} onClick={_openProject(h.full_name)} className={classes.itemHistory}>
+                                      <ProgressiveImage
+                                          fallBack="/img/placeholder-square.jpg"
+                                          src={h.owner.avatar_url}
+                                          render={(src) => <img width="30" alt={h.name} src={src} />}
+                                      />
+                                      <p>{h.name}</p>
+                                  </button>
+                              ))
+                            : null}
+                    </div>
+
                     <h1>{project.name}</h1>
-                    <button onClick={_openProfile(project.owner.login)} className={classes.profile}>
-                        <ProgressiveImage
-                            fallBack="/img/placeholder-square.jpg"
-                            src={project.owner.avatar_url}
-                            render={(src) => <img width="20" alt={project.owner.login} src={src} />}
-                        />
-                        @{project.owner.login}
-                    </button>
+                    <UserCard user={project.owner} onClick={_openProfile(project.owner.login)} />
                     <br />
                     <a href={project.html_url} target="_blank" rel="noopener noreferrer">
                         @{project.full_name}
@@ -112,18 +136,13 @@ const Project = () => {
 
                     <div className={classes.contribs}>
                         <span>Contributors:</span>{' '}
-                        {contributors.length
-                            ? contributors.map((contrib, i) => (
-                                  <button key={i} onClick={_openProfile(contrib.login)} className={classes.profile}>
-                                      <ProgressiveImage
-                                          fallBack="/img/placeholder-square.jpg"
-                                          src={contrib.avatar_url}
-                                          render={(src) => <img width="20" alt={project.owner.login} src={src} />}
-                                      />
-                                      @{contrib.login}
-                                  </button>
-                              ))
-                            : null}
+                        {contributors.length ? (
+                            contributors.map((contrib, i) => (
+                                <UserCard key={i} user={contrib} onClick={_openProfile(contrib.login)} />
+                            ))
+                        ) : contributorsFetch ? (
+                            <p>Loading ..</p>
+                        ) : null}
                     </div>
 
                     <div className={classes.markdown}>

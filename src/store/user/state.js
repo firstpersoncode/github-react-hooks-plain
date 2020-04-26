@@ -29,5 +29,7 @@ export const userState = {
     followers: [],
     followersFetch: false,
     followersPanel: false,
-    followersPage: 0
+    followersPage: 0,
+
+    history: []
 }

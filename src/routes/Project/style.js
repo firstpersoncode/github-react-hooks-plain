@@ -39,6 +39,22 @@ const useStyle = makeStyles(() => ({
         padding: 15,
         margin: '15px 0',
         border: '1px solid rgba(0,0,0,0.3)'
+    },
+    history: {
+        display: 'flex',
+        alignItems: 'center',
+        '& > *': {
+            padding: 5,
+            margin: 5
+        },
+        flexWrap: 'wrap'
+    },
+    itemHistory: {
+        display: 'flex',
+        alignItems: 'center',
+        '& > *': {
+            padding: 5
+        }
     }
 }))
 

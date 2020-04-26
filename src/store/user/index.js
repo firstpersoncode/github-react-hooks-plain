@@ -57,7 +57,18 @@ export const setUserSelected = async (setState, setError, userName) => {
 
         const selected = await pselected.json()
 
-        setState((prev) => ({ ...prev, ...userState, selected, selectedFetch: false }))
+        setState((prev) => {
+            let currHistory = prev.history
+            currHistory = currHistory.length
+                ? currHistory.length < 9
+                    ? currHistory.filter((h) => h.id !== selected.id).concat([selected])
+                    : currHistory
+                          .filter((_, i) => i !== 0)
+                          .filter((h) => h.id !== selected.id)
+                          .concat([selected])
+                : currHistory.concat([selected])
+            return { ...prev, ...userState, selected, selectedFetch: false, history: currHistory }
+        })
     } catch (err) {
         setState((prev) => ({ ...prev, selectedFetch: false }))
         setError({ message: err.message, statusCode: err.statusCode || 500 })
@@ -124,7 +135,8 @@ export const setUserRepos = async (setState, setError, userName, next) => {
             ...prev,
             repos,
             reposPage: currPage,
-            reposFetch: false
+            reposFetch: false,
+            reposPanel: true
         }))
     } catch (err) {
         setState((prev) => ({ ...prev, reposFetch: false }))
@@ -171,7 +183,8 @@ export const setUserFollowings = async (setState, setError, userName, next) => {
             ...prev,
             followings,
             followingsPage: currPage,
-            followingsFetch: false
+            followingsFetch: false,
+            followingsPanel: true
         }))
     } catch (err) {
         setState((prev) => ({ ...prev, followingsFetch: false }))
@@ -218,7 +231,8 @@ export const setUserFollowers = async (setState, setError, userName, next) => {
             ...prev,
             followers,
             followersPage: currPage,
-            followersFetch: false
+            followersFetch: false,
+            followersPanel: true
         }))
     } catch (err) {
         setState((prev) => ({ ...prev, followersFetch: false }))

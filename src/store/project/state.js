@@ -19,5 +19,7 @@ export const projectState = {
     languagesFetch: false,
 
     contributors: [],
-    contributorsFetch: false
+    contributorsFetch: false,
+
+    history: []
 }

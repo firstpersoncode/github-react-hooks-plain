@@ -57,7 +57,19 @@ export const setProjectSelected = async (setState, setError, projectName) => {
 
         const selected = await pselected.json()
 
-        setState((prev) => ({ ...prev, ...projectState, selected, selectedFetch: false }))
+        setState((prev) => {
+            let currHistory = prev.history
+            currHistory = currHistory.length
+                ? currHistory.length < 9
+                    ? currHistory.filter((h) => h.id !== selected.id).concat([selected])
+                    : currHistory
+                          .filter((_, i) => i !== 0)
+                          .filter((h) => h.id !== selected.id)
+                          .concat([selected])
+                : currHistory.concat([selected])
+
+            return { ...prev, ...projectState, selected, selectedFetch: false, history: currHistory }
+        })
     } catch (err) {
         setState((prev) => ({ ...prev, selectedFetch: false }))
         setError({ message: err.message, statusCode: err.statusCode || 500 })
